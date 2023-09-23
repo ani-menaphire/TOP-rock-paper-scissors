@@ -77,8 +77,23 @@ function playRound(victory, defeat, tie) {
     return compare()
   }
 }
-    
+
+const body = document.body;
+const startButton = document.querySelector('.start-button');
+const decision = document.querySelector('#decision');
+const score = document.querySelector('#score');
+const result = document.querySelector('#result');
+
+const rock = document.createElement('button');
+rock.textContent = 'Rock';
+const paper = document.createElement('button');
+paper.textContent = 'Paper';
+const scissors = document.createElement('button');
+scissors.textContent = 'Scissors';
+
+
 function game() {  
+  
   let question = prompt('Do you wanna play Rock Paper Scissors with me?');
   decide()
   function decide() {
@@ -90,15 +105,25 @@ function game() {
       }
     
       else if (answer == 'yes') {
-        
-          alert('Alright. Click "OK" or press Enter so we can start');
-  
+          startButton.remove()
+
+          decision.textContent = 'Alright. So.. what will it be: Rock, Paper or Scissors?';
+
+          body.insertBefore(rock, score);
+          body.insertBefore(paper, score);
+          body.insertBefore(scissors, score);
+
+          let myScore = 0
+          let computerScore = 0
+
+          score.textContent = `${myScore} - ${computerScore}`;
+          
           let victory = 'Ugh, you win this one';
           let defeat = 'That\'s right';
           let tie = 'It\'s a tie';
             
-          for (myScore = 0, computerScore = 0; myScore < 5 && computerScore < 5;) {
-          round = playRound(victory, defeat, tie);
+          for (; myScore < 5 && computerScore < 5;) {
+          //round = playRound(victory, defeat, tie);
           console.log(round);
   
           if (round.includes(victory)) {
