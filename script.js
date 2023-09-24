@@ -86,11 +86,13 @@ const result = document.querySelector('#result');
 
 const rock = document.createElement('button');
 rock.textContent = 'Rock';
+rock.classList.add('weapon');
 const paper = document.createElement('button');
 paper.textContent = 'Paper';
+paper.classList.add('weapon');
 const scissors = document.createElement('button');
 scissors.textContent = 'Scissors';
-
+scissors.classList.add('weapon');
 
 function game() {  
   
@@ -113,6 +115,8 @@ function game() {
           body.insertBefore(paper, score);
           body.insertBefore(scissors, score);
 
+          const weapons = document.querySelectorAll('.weapon')
+          console.log(weapons)
           let myScore = 0
           let computerScore = 0
 
