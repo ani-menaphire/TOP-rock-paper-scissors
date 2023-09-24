@@ -9,73 +9,24 @@ function getComputerChoice() {
   else return 'Scissors';
 }
 
-function playRound(victory, defeat, tie) {
-  let playerSelection = prompt('So.. what will it be: Rock, Paper or Scissors?');
+function playRound(victory, defeat, tie) {     
+  let computerSelection = getComputerChoice();
 
-  return compare()    
-  function compare() {   
-    if (playerSelection !== null) {
-       playerSelection = (playerSelection.toLowerCase()).charAt(0).toUpperCase() + playerSelection.slice(1);
-      let computerSelection = getComputerChoice();
-
-      if (playerSelection === computerSelection) {            
-        return `${computerSelection}. ${tie}`
-      }
-      
-      else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
-          playerSelection === 'Scissors' && computerSelection === 'Paper' ||
-          playerSelection === 'Paper' && computerSelection === 'Rock')   {           
-        return `${computerSelection}. ${victory}, ${playerSelection} beats ${computerSelection}`
-      }
-
-      else if (computerSelection === 'Rock' && playerSelection === 'Scissors' ||
-          computerSelection === 'Scissors' && playerSelection === 'Paper' ||
-          computerSelection === 'Paper' && playerSelection === 'Rock') {       
-        return `${computerSelection}. ${defeat}, ${computerSelection} beats ${playerSelection}`
-      }   
-
-      else if (playerSelection == '') {
-        playerSelection = prompt('Umm... are you sleeping? Make your move.');
-        if (playerSelection !== null) {
-          playerSelection = playerSelection.toLowerCase()
-          if (playerSelection == 'yes') {
-            playerSelection = prompt('Okay then wake up and make your move!!')
-          }
-          if (playerSelection == 'no') {
-            playerSelection = prompt('Then why are you quiet???')
-          }
-          return compare()
-        }
-        else return inputNull();
-        
-      }
-      else {
-        let randomSelection = playerSelection
-        playerSelection = prompt(`"${randomSelection}"..? Are you messing with me?`)
-        if (playerSelection!== null) {
-          playerSelection = playerSelection.toLowerCase();
-          if (playerSelection == 'yes') {
-            playerSelection = prompt('Then stop it and make your move.')
-          }
-          if (playerSelection == 'no') {
-            playerSelection = prompt(`Then wth is "${randomSelection}"??`);
-          }
-          return compare();
-        }
-        
-        else return inputNull();
-      }
-    }
-    
-    else {
-      return inputNull()
-    }
+  if (playerSelection === computerSelection) {            
+    return `${computerSelection}. ${tie}`
+  }
+  
+  else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
+      playerSelection === 'Scissors' && computerSelection === 'Paper' ||
+      playerSelection === 'Paper' && computerSelection === 'Rock')   {           
+    return `${computerSelection}. ${victory}, ${playerSelection} beats ${computerSelection}`
   }
 
-  function inputNull() {
-    playerSelection = prompt('Who said you could leave? Make your move.');
-    return compare()
-  }
+  else if (computerSelection === 'Rock' && playerSelection === 'Scissors' ||
+      computerSelection === 'Scissors' && playerSelection === 'Paper' ||
+      computerSelection === 'Paper' && playerSelection === 'Rock') {       
+    return `${computerSelection}. ${defeat}, ${computerSelection} beats ${playerSelection}`
+  }   
 }
 
 const body = document.body;
