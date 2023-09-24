@@ -66,42 +66,32 @@ function game() {
           body.insertBefore(paper, score);
           body.insertBefore(scissors, score);
 
-          const weapons = document.querySelectorAll('.weapon')
-          console.log(weapons)
+          const buttons = document.querySelectorAll('.weapon')
+          
           let myScore = 0
           let computerScore = 0
 
           score.textContent = `${myScore} - ${computerScore}`;
           
-          let victory = 'Ugh, you win this one';
-          let defeat = 'That\'s right';
-          let tie = 'It\'s a tie';
+          
             
-          for (; myScore < 5 && computerScore < 5;) {
-          //round = playRound(victory, defeat, tie);
+          buttons.forEach(button => {
+              button.addEventListener('click', (e) => {
+                let playerSelection = e.target.textContent;
+                round = playRound(playerSelection);
+              })
+          })
+          
           console.log(round);
   
-          if (round.includes(victory)) {
-              myScore++;
-              console.log(myScore + ' - ' + computerScore);
-            }
-                        
-          else if (round.includes(defeat)) {
-              computerScore++;
-              console.log(myScore + ' - ' + computerScore);
-          }
-  
-          else if (round.includes(tie)) {
-            console.log(myScore + ' - ' + computerScore);
-          }
-        }
-  
-          if (myScore >= 5) {
+          
+       
+          /* if (myScore >= 5) {
             console.log('Wait how did you.. That\'s not fair!! I wanna play again, click me click me click meeee.')
           }  
           else if (computerScore >= 5) {
             console.log('Haha yes, I beat you. I\'m so good at this- oh what\'s that? ...You want to me to kick your butt again? Huhu if you say so, click me.')
-          }
+          } */
               
       }
   
