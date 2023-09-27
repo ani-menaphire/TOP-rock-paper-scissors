@@ -1,52 +1,25 @@
-function getRandomNum() {
-  return Math.floor(Math.random() * 3) + 1;
-}
-
-function getComputerChoice() {
-  let randomNum = getRandomNum();
-  if (randomNum == 1) return 'Rock';
-  else if (randomNum == 2) return 'Paper';
-  else return 'Scissors';
-}
-
-function playRound(victory, defeat, tie) {     
-  let computerSelection = getComputerChoice();
-
-  if (playerSelection === computerSelection) {            
-    return `${computerSelection}. ${tie}`
-  }
-  
-  else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
-      playerSelection === 'Scissors' && computerSelection === 'Paper' ||
-      playerSelection === 'Paper' && computerSelection === 'Rock')   {           
-    return `${computerSelection}. ${victory}, ${playerSelection} beats ${computerSelection}`
-  }
-
-  else if (computerSelection === 'Rock' && playerSelection === 'Scissors' ||
-      computerSelection === 'Scissors' && playerSelection === 'Paper' ||
-      computerSelection === 'Paper' && playerSelection === 'Rock') {       
-    return `${computerSelection}. ${defeat}, ${computerSelection} beats ${playerSelection}`
-  }   
-}
-
 const body = document.body;
 const startButton = document.querySelector('.start-button');
+startButton.addEventListener('click', game);
 const decision = document.querySelector('#decision');
 const score = document.querySelector('#score');
 const result = document.querySelector('#result');
 
 const rock = document.createElement('button');
 rock.textContent = 'Rock';
-rock.classList.add('weapon');
+rock.classList.add('rps-button');
+
 const paper = document.createElement('button');
 paper.textContent = 'Paper';
-paper.classList.add('weapon');
+paper.classList.add('rps-button');
 const scissors = document.createElement('button');
 scissors.textContent = 'Scissors';
-scissors.classList.add('weapon');
+scissors.classList.add('rps-button');
 
-function game() {  
-  
+let myScore = 0
+let computerScore = 0
+
+function game() {   
   let question = prompt('Do you wanna play Rock Paper Scissors with me?');
   decide()
   function decide() {
@@ -58,41 +31,34 @@ function game() {
       }
     
       else if (answer == 'yes') {
-          startButton.remove()
+        
+        decision.textContent = 'Alright. So.. what will it be: Rock, Paper or Scissors?';
 
-          decision.textContent = 'Alright. So.. what will it be: Rock, Paper or Scissors?';
+        body.insertBefore(rock, score);
+        
+        body.insertBefore(paper, score);
+        
+        body.insertBefore(scissors, score);
+        
+        const buttons = document.querySelectorAll('.rps-button');
 
-          body.insertBefore(rock, score);
-          body.insertBefore(paper, score);
-          body.insertBefore(scissors, score);
-
-          const buttons = document.querySelectorAll('.weapon')
-          
-          let myScore = 0
-          let computerScore = 0
-
-          score.textContent = `${myScore} - ${computerScore}`;
-          
-          
-            
-          buttons.forEach(button => {
-              button.addEventListener('click', (e) => {
-                let playerSelection = e.target.textContent;
-                round = playRound(playerSelection);
-              })
+        buttons.forEach(button => {
+          button.addEventListener('click', (e) => { 
+            playRound(e.target.textContent, restart);
           })
-          
-          console.log(round);
-  
-          
-       
-          /* if (myScore >= 5) {
-            console.log('Wait how did you.. That\'s not fair!! I wanna play again, click me click me click meeee.')
-          }  
-          else if (computerScore >= 5) {
-            console.log('Haha yes, I beat you. I\'m so good at this- oh what\'s that? ...You want to me to kick your butt again? Huhu if you say so, click me.')
-          } */
-              
+        })
+        
+        function restart() {
+          startButton.remove();
+          myScore = 0;
+          computerScore = 0;
+          score.textContent = `You - ${myScore} : ${computerScore} - Me`;
+          rock.disabled = false;
+          paper.disabled = false;
+          scissors.disabled = false;
+          result.textContent = ''
+        }
+        restart()  
       }
   
       else if (answer == '') {
@@ -109,7 +75,56 @@ function game() {
   } 
 }
   
+function getRandomNum() {
+  return Math.floor(Math.random() * 3) + 1;
+}
 
-        
-        
-      
+function getComputerChoice() {
+  let randomNum = getRandomNum();
+  if (randomNum == 1) return 'Rock';
+  else if (randomNum == 2) return 'Paper';
+  else return 'Scissors';
+}
+
+function playRound(playerSelection, restart) {     
+  let computerSelection = getComputerChoice();
+
+  if (playerSelection === computerSelection) {            
+    result.textContent = `${computerSelection}. It's a tie.`
+  }
+  
+  else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
+    playerSelection === 'Scissors' && computerSelection === 'Paper' ||
+    playerSelection === 'Paper' && computerSelection === 'Rock')   {           
+    result.textContent = `${computerSelection}. ugh, you win this one. ${playerSelection} beats ${computerSelection}.`
+    myScore++
+  }
+
+  else if (computerSelection === 'Rock' && playerSelection === 'Scissors' ||
+    computerSelection === 'Scissors' && playerSelection === 'Paper' ||
+    computerSelection === 'Paper' && playerSelection === 'Rock') {       
+    result.textContent = `${computerSelection}. That's right, ${computerSelection} beats ${playerSelection}.`
+    computerScore++
+  }   
+  score.textContent = `You - ${myScore} : ${computerScore} - Me`;
+  if (myScore === 5 || computerScore === 5) {
+    rock.disabled = true
+    paper.disabled = true
+    scissors.disabled = true;
+    startButton.textContent = 'Click me again'
+    body.append(startButton)
+    startButton.removeEventListener('click', game)
+    startButton.addEventListener('click', restart)
+  }
+
+  if (myScore === 5) {
+    result.textContent = 'Wait how did you.. That\'s not fair!! I wanna play again, click me click me click meeee.'
+    
+  }
+  else if (computerScore === 5) {
+    result.textContent = 'Haha yes, I beat you. I\'m so good at this- oh what\'s that? ...You wanna have your butt kicked again? if you say so, click me.'
+  }
+ 
+}
+
+
