@@ -1,4 +1,6 @@
-const body = document.body;
+const body = document.body
+const outerDiv = document.querySelector('.outer-div');
+const buttonDiv = document.querySelector('.button-div')
 const startButton = document.querySelector('.start-button');
 startButton.addEventListener('click', game);
 const decision = document.querySelector('#decision');
@@ -12,6 +14,7 @@ rock.classList.add('rps-button');
 const paper = document.createElement('button');
 paper.textContent = 'Paper';
 paper.classList.add('rps-button');
+
 const scissors = document.createElement('button');
 scissors.textContent = 'Scissors';
 scissors.classList.add('rps-button');
@@ -33,12 +36,15 @@ function game() {
       else if (answer == 'yes') {
         
         decision.textContent = 'Alright. So.. what will it be: Rock, Paper or Scissors?';
-
-        body.insertBefore(rock, score);
         
-        body.insertBefore(paper, score);
+        body.setAttribute('id', 'body');
+        outerDiv.setAttribute('id', 'outer-div');
+        buttonDiv.setAttribute('id', 'button-div')
+        buttonDiv.append(rock);
         
-        body.insertBefore(scissors, score);
+        buttonDiv.append(paper);
+        
+        buttonDiv.append(scissors);
         
         const buttons = document.querySelectorAll('.rps-button');
 
