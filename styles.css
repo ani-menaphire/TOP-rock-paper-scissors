@@ -1,31 +1,146 @@
-#body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  width: auto;
-  align-items: center;
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: "tilt neon";
 }
 
-.outer-div {
+.container {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing:border-box;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  padding: 50px;
+  position: relative;
+  min-height: calc(100vh - 157px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background-color: rgb(47 11 55);
+  
+}
+
+#heading {  
+  margin: 0;
+  background-color: rgb(63, 16, 63);
+  color: rgb(253, 195, 58);
+  border-bottom-style: ridge;
+  border-bottom-color: rgb(253, 195, 58);
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.game {
+  padding: 40px 60px;
+  border-radius: 20px;
+  border-width: 10px; 
+  background-color: rgb(112, 46, 112);  
+  display: flex;
+  box-shadow: 0px 0px 40px 10px rgb(112, 46, 112);
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 80px;
+} 
+
+#score {
+  font-size: 25px;
+  font-weight: bold;
+  color: rgb(49, 14, 65);
+ 
+  border-radius: 4px;
+  
+  padding: 5px 10px;
+  width: 164px;
+  
 }
 
 .weapons {
-  width: 800px;
+  max-width: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 #result {
   text-align: center;
-}
-.image-div:hover {
-  cursor: pointer;
-}
-img {
-  width: 200px;
+  color: rgb(247, 215, 156);
+  font-size: 20px;
+  font-weight: 600;
+  max-width: 820px;
+  font-family: "tilt neon";
 }
 
+.image-div {
+  background-color: rgb(159 111 126);
+  border: solid;
+  border-width: 2px;
+  border-color: rgb(63, 16, 63);
+  box-shadow: 7px 7px 2px rgb(47 11 55);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 15px;
+  max-width: 200px;
+}
+
+.image-div:hover {
+  cursor: pointer;
+  max-width: 208px;
+  margin: 11px;
+}
+
+.image-div.clicked {
+  max-width: 200px;
+  margin-left: 22px;
+  margin-right: 8px;
+  margin-top: 22px;
+  margin-bottom: 8px;
+  box-shadow: none;
+}
+
+
+img {
+  width: 100%;
+  min-width: 100px;
+
+}
+
+.start-button {
+  margin: 10px;
+}
+
+.restart-button {
+  padding: 15px;
+  background-color: rgb(63, 16, 63);
+  color: rgb(255 198 60);
+  font-size: 20px;
+  font-weight: bold;
+  border-style: outset;
+  border-width: 1px;
+  border-color: rgb(255 180 0); 
+  border-radius: 10px;
+}
+
+.restart-button:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 6px rgb(255 180 0);
+  background-color: rgb(36, 9, 36);
+}
+
+.restart-button.hidden {
+  visibility: hidden;
+}

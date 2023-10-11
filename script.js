@@ -1,13 +1,17 @@
-const body = document.body
-const outerDiv = document.querySelector('.outer-div');
-const weaponsDiv = document.querySelector('.weapons')
-const startButton = document.querySelector('.start-button');
-startButton.addEventListener('click', game);
-const decision = document.querySelector('#decision');
+const body = document.body;
+const container = document.querySelector('.container');
+const startBtn = document.querySelector('.start-button');
+startBtn.addEventListener('click', game);
+const restartBtn = document.querySelector('.restart-button');
 const score = document.querySelector('#score');
 const result = document.querySelector('#result');
-
-body.removeChild(outerDiv)
+const images = document.querySelectorAll('img')
+images.forEach(image => {
+  image.ondragstart = () => {
+    return false;
+  }
+})
+body.removeChild(container)
 
 let myScore = 0
 let computerScore = 0
@@ -24,31 +28,33 @@ function game() {
       }
     
       else if (answer == 'yes') {
-        body.appendChild(outerDiv)               
-        body.setAttribute('id', 'body');
+        startBtn.remove();
+        body.appendChild(container);   
         
-        
-        
-        const buttons = document.querySelectorAll('.image-div');
+        restartBtn.addEventListener('click', restart)
+        const weapons = document.querySelectorAll('.image-div');
 
-        buttons.forEach(button => {
-          let playerSelection = button.id.charAt(0).toUpperCase() + button.id.slice(1);
-          button.addEventListener('click', ()=> {        
+        weapons.forEach(weapon => {
+          let playerSelection = weapon.id.charAt(0).toUpperCase() + weapon.id.slice(1);
+          weapon.addEventListener('click', ()=> {       
             if (myScore == 5 || computerScore == 5) {
               return;
             }
             playRound(playerSelection, restart)
           })
+          weapon.addEventListener('mousedown', () => {
+            weapon.classList.add('clicked') 
+          })
+          container.addEventListener('mouseup', ()=> {
+            weapon.classList.remove('clicked')
+          })
         })
         
         function restart() {
-          startButton.remove();
+          restartBtn.classList.add('hidden');
           myScore = 0;
           computerScore = 0;
           score.textContent = `You - ${myScore} : ${computerScore} - Me`;
-          rock.disabled = false;
-          paper.disabled = false;
-          scissors.disabled = false;
           result.textContent = ''
         }
         restart()  
@@ -89,7 +95,7 @@ function playRound(playerSelection, restart) {
   else if (playerSelection === 'Rock' && computerSelection === 'Scissors' ||
     playerSelection === 'Scissors' && computerSelection === 'Paper' ||
     playerSelection === 'Paper' && computerSelection === 'Rock')   {           
-    result.textContent = `${computerSelection}. ugh, you win this one. ${playerSelection} beats ${computerSelection}.`
+    result.textContent = `${computerSelection}. Ugh, you win this one. ${playerSelection} beats ${computerSelection}.`
     myScore++
   }
 
@@ -101,10 +107,7 @@ function playRound(playerSelection, restart) {
   }   
   score.textContent = `You - ${myScore} : ${computerScore} - Me`;
   if (myScore === 5 || computerScore === 5) { 
-    startButton.textContent = 'Click me again'
-    body.append(startButton)
-    startButton.removeEventListener('click', game)
-    startButton.addEventListener('click', restart)
+    restartBtn.classList.remove('hidden')
   }
   
   if (myScore === 5) {

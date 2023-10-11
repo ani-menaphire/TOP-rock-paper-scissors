@@ -3,25 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Rock Paper Scissors</title>
+  <link rel="icon" type="image/x-icon" href="/images/scissors.png">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="outer-div">
-    <p id="decision">Alright. So.. what will it be: Rock, Paper or Scissors?</p>
-    <div class="weapons">
-      <div id="rock" class="image-div">
-        <img src="images/rock.png" alt="">
+  <div class="container">
+     <h1 id="heading">Alright. So.. what will it be: Rock, Paper or Scissors?</h1>
+
+    <div class="content">
+     <div class="game">
+        <div class="weapons">
+          <div id="rock" class="image-div">
+            <img src="images/rock.png" alt="">
+          </div>
+          <div id="paper" class="image-div">
+            <img src="images/paper.png" alt="">
+          </div>
+          <div id="scissors" class="image-div">
+            <img src="images/scissors.png" alt="">
+          </div>
+        </div>
+        <p id="score"></p>   
+        <p id="result"></p>   
       </div>
-      <div id="paper" class="image-div">
-        <img src="images/paper.png" alt="">
-      </div>
-      <div id="scissors" class="image-div">
-        <img src="images/scissors.png" alt="">
-      </div>
+      <button class="restart-button">Click Me Again</button> 
     </div>
-    <p id="score"></p>   
-    <p id="result"></p>   
+  
   </div> 
   <button class="start-button">Click Me</button>
   <script src = script.js></script>
